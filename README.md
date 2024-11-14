@@ -19,4 +19,12 @@ Interaction Features
 - Comments: Users can leave comments on songs, allowing for feedback and discussions.
 - Playlists: Users can create, name, and organize playlists with multiple songs.
 
-Check out the wiki for the relation tables and ERD!
+Project Relation model:
+![Screenshot 2024-11-02 012537](https://github.com/user-attachments/assets/5f5ce55e-08db-4f49-9d75-5f3eab52e99a)
+
+Project ERD:
+![Screenshot 2024-11-01 170419](https://github.com/user-attachments/assets/22fc5475-2127-4748-a5fd-cb71397f9ee0)
+
+A few tables (song and user):
+![Screenshot 2024-11-13 221725](https://github.com/user-attachments/assets/327357db-5297-440a-901b-6d2b1acb07eb)
+
