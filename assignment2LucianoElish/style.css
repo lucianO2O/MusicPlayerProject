@@ -19,7 +19,7 @@ input { background-color: azure; }
 
 a { color:rgba(220, 20, 60, 0.771); }
 
-div .form {
+form {
     text-align: center;
     background-color: rgb(60, 60, 66);
     width: auto;
