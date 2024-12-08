@@ -1,0 +1,24 @@
+{
+  "name": "musicplayerproject",
+  "version": "1.0.0",
+  "description": "Melody - an application to upload your own/ favorite songs and find other's favs as well!",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/lucianoO2O/MusicPlayerProject"
+  },
+  "author": "Luciano Elish",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "mysql2": "^3.11.5"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}
