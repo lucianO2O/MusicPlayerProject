@@ -17,6 +17,15 @@ async function createTable() {
 createTable()
 
 
+//check to see if username is in use:
+async function userExists() {
+  let sql = `
+    SELECT * FROM user
+    WHERE username = ?
+  `
+  return await con.query(sql)
+}
+
 //logging in a user
 async function login(user) {
     let cUser = await userExists(user.username)
@@ -35,16 +44,44 @@ async function register(user) {
     //create new user
     let sql = `
         insert into user(username, password_hash)
-        values ("${user.username}", "${user.password_hash})
+        values (?, ?)
     `
-
     await con.query(sql)
     let newUser = await login(cUser)
     return newUser[0]
 }
 
+// delete a user
+async function deleteAccount(user) {
+  let sql = `
+    DELETE from user
+    WHERE username = ?
+  `
+  await con.query(sql)
+}
+
+async function updateEmail(user) {
+  let cEmail = await getEmail(user)
+  if(cEmail) throw Error("Email already in use!!")
+
+  let sql = `
+    UPDATE user SET email = ?
+    WHERE username = ?
+  `
+  await con.query(sql)
+  let updatedUser = await userExists(user)
+  return updatedUser[0]
+}
+
 //function to get all users
-let getUsers =  () => user
+let getUsers =  async () => {
+  try {
+    const [rows] = await pool.execute(`select * from user;`) //executing sql query and inserting into an array
+    return rows
+  } catch (error) {
+    throw new Error("Couldn't get all users: " + error.message)
+  }
+}
 
 //need to export to allow access
-module.exports = { getUsers, login, register }
+module.exports = { getUsers, login, register, deleteAccount, updateEmail }

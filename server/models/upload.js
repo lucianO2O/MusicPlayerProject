@@ -120,20 +120,21 @@ async function deleteUpload(upload_id) {
 //stores uploads in array of table rows
 let getUploads = async () => {
     try {
-        const [rows] = await pool.execute(`select * from song_uploads;`)
+        const [rows] = await pool.execute(`select * from song_uploads;`) // puts each row of data into an array, "pool.execute" executes the sql query
         return rows
     } catch(error) {
         throw new Error('Failed to get uploads: ' + error.message)
     }
 }
 
-//displays uploads
-async function showUploads() {
-    try {
-        console.log(await getUploads())
-    } catch(error) {
-        throw new Error('Failed to display uploads: ' + error.message)
-    }
+async function updateUpload(upload_id, updates) {
+  try {
+      const query = `UPDATE song_uploads SET ? WHERE upload_id = ?;`
+      const [result] = await pool.query(query, [updates, upload_id]); 
+      return result.affectedRows > 0; // return true if any row was updated
+  } catch (error) {
+      throw new Error('Failed to update upload: ' + error.message) //otherwise throws failed to upload error
+  }
 }
 
-module.exports = { createUploadRecord, addSongRecord, uploadSong, deleteUpload, getUploads, showUploads }
+module.exports = { uploadSong, deleteUpload, getUploads, updateUpload }

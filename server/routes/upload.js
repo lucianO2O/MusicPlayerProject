@@ -3,7 +3,7 @@ const upload = require("../models/upload")
 const router = express.Router()
 
 router
-// get all uploads
+// get all uploads route
     .get('/', async (req, res) => {
         try {
         const uploads = await upload.getUploads()
@@ -13,7 +13,7 @@ router
         }
     })
 
-    // upload a new song
+    // upload a new song route
     .post('/upload', async (req, res) => {
         try {
         const { user_id, songDetails } = req.body; // id and song details in the request body
@@ -26,7 +26,7 @@ router
         }
     })
 
- // delete an upload
+ // delete an upload route
     .delete('/:upload_id', async (req, res) => {
         try {
         const { upload_id } = req.params; // get the upload ID from the URL
@@ -39,6 +39,28 @@ router
         }
         } catch (err) {
         res.status(500).send({ message: err.message })
+        }
+    })
+    
+    //update route
+    .put('/:upload_id', async (req, res) => {
+        try {
+            const { upload_id } = req.params;
+            const updates = req.body;
+    
+            if (!updates || Object.keys(updates).length === 0) {
+                return res.status(400).send({ message: 'No updates provided' })
+            }
+    
+            const success = await uploadModel.updateUpload(upload_id, updates);
+    
+            if (success) {
+                res.status(200).send({ message: 'Upload updated successfully' })
+            } else {
+                res.status(404).send({ message: 'Upload not found' })
+            }
+        } catch (err) {
+            res.status(500).send({ message: err.message })
         }
     })
 
