@@ -20,8 +20,8 @@ createTable()
 //logging in a user
 async function login(user) {
     let cUser = await userExists(user.username)
-    if(!cUsers[0]) throw Error("Username does not exist!")
-    if(cUser[0].password_hash !=user.password_hash) throw Error("Password is incorrect!")
+    if(!cUsers[0]) throw Error("Username does not exist: " + error.message)
+    if(cUser[0].password_hash !=user.password_hash) throw Error("Password is incorrect: " + error.message)
 
     return cUser[0]
 }
@@ -30,7 +30,7 @@ async function login(user) {
 async function register(user) {
     //check to see if username in use
     let cUser = await userExists(user.username)
-    if(cUser.length>0) throw Error("Username already exists!")
+    if(cUser.length>0) throw Error("Username already exists: " + error.message)
 
     //create new user
     let sql = `

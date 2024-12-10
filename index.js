@@ -5,6 +5,7 @@ const app = express()
 
 //gives access to routes in user
 const userRoutes = require("./server/routes/user")
+const song_uploadRoutes = require("./server/routes/upload")
 
 //CORS middleware
 app.use(function(req, res, next) {
@@ -16,6 +17,7 @@ app.use(function(req, res, next) {
 
 
 app.use("/user", userRoutes)
+app.use(express.json());
 app.use("/song_upload", song_uploadRoutes)
 
 const PORT = process.env.PORT || 3020

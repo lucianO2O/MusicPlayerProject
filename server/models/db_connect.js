@@ -1,5 +1,5 @@
 require('dotenv').config(); // make environment variables available
-const mysql = require('mysql2'); // allows the use of mysql
+const mysql = require('mysql2/promise'); // allows the use of mysql and promises
 
 //establish connection to mysql
 const con = mysql.createPool({

@@ -9,6 +9,13 @@ function login(e) {
         password: document.getElementById("password").value
     }
 
+    // fetchData('/user/login', user, 'POST')
+    // .then(data => {
+    //     if(!data.message) {
+    //         window.location.href = "index.html"
+    //     }
+    // })
+
     console.log(user)
 }
 
