@@ -6,7 +6,7 @@ router
 // get all uploads
     .get('/', async (req, res) => {
         try {
-        const uploads = await uploadModel.getUploads()
+        const uploads = await upload.getUploads()
         res.send(uploads); // sends all uploads as the response
         } catch (err) {
         res.status(500).send({ message: err.message })
@@ -19,7 +19,7 @@ router
         const { user_id, songDetails } = req.body; // id and song details in the request body
         const file = req.file; 
 
-        const result = await uploadModel.uploadSong(user_id, file, songDetails)
+        const result = await upload.uploadSong(user_id, file, songDetails)
         res.status(201).send(result); // Returns the upload result
         } catch (err) {
         res.status(500).send({ message: err.message })
@@ -30,7 +30,7 @@ router
     .delete('/:upload_id', async (req, res) => {
         try {
         const { upload_id } = req.params; // get the upload ID from the URL
-        const isDeleted = await uploadModel.deleteUpload(upload_id);
+        const isDeleted = await upload.deleteUpload(upload_id);
 
         if (isDeleted) {
             res.send({ success: true, message: 'Upload deleted successfully' })
