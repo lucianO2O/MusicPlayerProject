@@ -31,7 +31,7 @@ async function createTable() {
         FOREIGN KEY (user_id) REFERENCES user(user_id),
         FOREIGN KEY (upload_id) REFERENCES song_uploads(upload_id)
     );`
-
+    await con.query(sql)
 }
 
 createTable()
